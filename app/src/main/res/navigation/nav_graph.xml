@@ -80,6 +80,6 @@
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="com.example.firebasetemplate.PostDetailFragment"
-        android:label="fragment_post_detail"
+        android:label="Post"
         tools:layout="@layout/fragment_post_detail" />
 </navigation>
