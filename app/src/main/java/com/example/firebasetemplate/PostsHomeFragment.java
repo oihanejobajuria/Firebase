@@ -75,7 +75,7 @@ public class PostsHomeFragment extends AppFragment {
                         .update("likes."+auth.getUid(),
                                 !post.likes.containsKey(auth.getUid()) ? true : FieldValue.delete());
             });
-
+            holder.itemView.setOnClickListener(view -> navController.navigate(R.id.postDetailFragment));
             holder.binding.favorito.setChecked(post.likes.containsKey(auth.getUid()));
         }
 

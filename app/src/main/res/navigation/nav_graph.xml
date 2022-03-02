@@ -73,5 +73,13 @@
             tools:layout="@layout/fragment_posts">
 
         </fragment>
+        <action
+            android:id="@+id/action_global_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
     </navigation>
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.example.firebasetemplate.PostDetailFragment"
+        android:label="fragment_post_detail"
+        tools:layout="@layout/fragment_post_detail" />
 </navigation>
