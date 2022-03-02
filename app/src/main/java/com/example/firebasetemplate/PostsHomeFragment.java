@@ -68,6 +68,7 @@ public class PostsHomeFragment extends AppFragment {
             holder.binding.contenido.setText(post.content);
             holder.binding.autor.setText(post.authorName);
             Glide.with(requireContext()).load(post.imageUrl).into(holder.binding.imagen);
+            Glide.with(requireContext()).load(post.imageUser).into(holder.binding.autorFoto);
 
             holder.binding.favorito.setOnClickListener(v -> {
                 db.collection("posts").document(post.postid)
