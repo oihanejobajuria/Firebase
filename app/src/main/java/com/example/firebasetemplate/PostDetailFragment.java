@@ -8,23 +8,23 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.example.firebasetemplate.databinding.FragmentPostDetailBinding;
 import com.example.firebasetemplate.model.Post;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.FieldValue;
 
 public class PostDetailFragment extends AppFragment {
 
-    private static final String POST_ID = "param";
-    private String mParam;
+    //    private static final String POST_ID = "param";
+//    private String mParam;
     private FragmentPostDetailBinding binding;
 
     public PostDetailFragment() {
     }
 
-    public PostDetailFragment(String mParam) {
-        this.mParam = mParam;
-    }
+//    public PostDetailFragment(String mParam) {
+//        this.mParam = mParam;
+//    }
 
     // -------------------------------------------------------
 
@@ -37,19 +37,39 @@ public class PostDetailFragment extends AppFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        setQuery().addSnapshotListener((collectionSnapshot, e) -> {
-            Post post = new Post();
-            for (DocumentSnapshot documentSnapshot: collectionSnapshot) {
-                post = documentSnapshot.toObject(Post.class);
-                post.postid = documentSnapshot.getId();
-            }
+        db.collection("posts").
+                document(PostDetailFragmentArgs.fromBundle(getArguments()).
+                        getPostId()).addSnapshotListener((collectionSnapshot, e) -> {
+            if (collectionSnapshot != null) {
+                Post post = collectionSnapshot.toObject(Post.class);
+                binding.autor.setText(post.authorName);
+                binding.contenido.setText(post.content);
 
-            binding.autor.setText(post.authorName);
+                if (getActivity() == null) {
+                    return;
+                } else {
+                    Glide.with(getActivity()).load(post.imageUrl).centerCrop().into(binding.imagen);
+                    Glide.with(getActivity()).load(post.imageUser).centerCrop().into(binding.autorFoto);
+                }
+
+                binding.favorito.setChecked(post.likes.containsKey(auth.getUid()));
+                System.out.println("PostId: "
+                        + post.postid);
+
+
+                post.postid = db.collection("posts").
+                        document(PostDetailFragmentArgs.fromBundle(getArguments()).getPostId())
+                        .getId();
+
+                binding.favorito.setOnClickListener(v ->
+                        db.collection("posts").document(post.postid)
+                        .update("likes." + auth.getUid(),
+                                !post.likes.containsKey(auth.getUid()) ? true : FieldValue.delete()));
+
+
+            }
         });
 
-    }
 
-    Query setQuery() {
-        return db.collection("posts").whereEqualTo("postid", mParam);
     }
 }

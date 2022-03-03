@@ -81,5 +81,10 @@
         android:id="@+id/postDetailFragment"
         android:name="com.example.firebasetemplate.PostDetailFragment"
         android:label="Post"
-        tools:layout="@layout/fragment_post_detail" />
+        tools:layout="@layout/fragment_post_detail" >
+        <argument
+            android:name="postId"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 </navigation>

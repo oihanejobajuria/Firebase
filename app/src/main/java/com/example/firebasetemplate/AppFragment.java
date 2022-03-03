@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+
 public abstract class AppFragment extends Fragment {
     public AppViewModel appViewModel;
     public NavController navController;

@@ -70,6 +70,7 @@ public class NewPostFragment extends AppFragment {
                                         binding.publicar.setEnabled(true);
                                         navController.popBackStack();
                                     });
+//                            post.postid = DocumentSnapshot.getId();
                         });
             }
             else {

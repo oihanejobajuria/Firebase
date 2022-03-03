@@ -41,7 +41,7 @@ public class PostsHomeFragment extends AppFragment {
 
         setQuery().addSnapshotListener((collectionSnapshot, e) -> {
             postsList.clear();
-            for (DocumentSnapshot documentSnapshot: collectionSnapshot) {
+            for (DocumentSnapshot documentSnapshot : collectionSnapshot) {
                 Post post = documentSnapshot.toObject(Post.class);
                 post.postid = documentSnapshot.getId();
                 postsList.add(post);
@@ -72,12 +72,17 @@ public class PostsHomeFragment extends AppFragment {
 
             holder.binding.favorito.setOnClickListener(v -> {
                 db.collection("posts").document(post.postid)
-                        .update("likes."+auth.getUid(),
+                        .update("likes." + auth.getUid(),
                                 !post.likes.containsKey(auth.getUid()) ? true : FieldValue.delete());
             });
             holder.itemView.setOnClickListener(view -> {
-                navController.navigate(R.id.postDetailFragment);
+                NavigationDirections.ActionGlobalPostDetailFragment action = NavigationDirections.actionGlobalPostDetailFragment();
+                action.setPostId(post.postid);
+                navController.navigate(action);
             });
+            if (getActivity() == null) {
+                return;
+            }
             holder.binding.favorito.setChecked(post.likes.containsKey(auth.getUid()));
         }
 
@@ -88,6 +93,7 @@ public class PostsHomeFragment extends AppFragment {
 
         class ViewHolder extends RecyclerView.ViewHolder {
             ViewholderPostBinding binding;
+
             public ViewHolder(ViewholderPostBinding binding) {
                 super(binding.getRoot());
                 this.binding = binding;
