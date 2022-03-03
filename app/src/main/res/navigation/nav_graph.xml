@@ -73,9 +73,6 @@
             tools:layout="@layout/fragment_posts">
 
         </fragment>
-        <action
-            android:id="@+id/action_global_postDetailFragment"
-            app:destination="@id/postDetailFragment" />
     </navigation>
     <fragment
         android:id="@+id/postDetailFragment"
@@ -87,4 +84,7 @@
             app:argType="string"
             android:defaultValue='""' />
     </fragment>
+    <action
+        android:id="@+id/action_global_postDetailFragment"
+        app:destination="@id/postDetailFragment" />
 </navigation>

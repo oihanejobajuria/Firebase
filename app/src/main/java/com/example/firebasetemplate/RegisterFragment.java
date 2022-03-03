@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.firebasetemplate.databinding.FragmentRegisterBinding;
+import com.example.firebasetemplate.model.UserClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -53,6 +54,10 @@ public class RegisterFragment extends AppFragment {
                 binding.emailEditText.setError("Required Email");
                 return;
             }
+            if (binding.usernameEditText.getText().toString().isEmpty()) {
+                binding.usernameEditText.setError("Required Username");
+                return;
+            }
             if (binding.passwordEditText.getText().toString().isEmpty()) {
                 binding.passwordEditText.setError("Required Password");
                 return;
@@ -63,36 +68,43 @@ public class RegisterFragment extends AppFragment {
                             binding.emailEditText.getText().toString(),
                             binding.passwordEditText.getText().toString()
                     ).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
+                if (task.isSuccessful()) {
 
-                            FirebaseStorage.getInstance()
-                                    .getReference("/images/" + UUID.randomUUID() + ".jpg")
-                                    .putFile(uriImg)
-                                    .continueWithTask(task1 -> task1.getResult().getStorage().getDownloadUrl())
-                                    .addOnSuccessListener(urlDescarga -> {
-                                        downloadUriImg = urlDescarga;
+                    FirebaseStorage.getInstance()
+                            .getReference("/images/" + UUID.randomUUID() + ".jpg")
+                            .putFile(uriImg)
+                            .continueWithTask(task1 -> task1.getResult().getStorage().getDownloadUrl())
+                            .addOnSuccessListener(urlDescarga -> {
+                                downloadUriImg = urlDescarga;
 
-                                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                        UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
-                                                .setDisplayName(binding.nameEditText.getText().toString())
-                                                .setPhotoUri(downloadUriImg)
-                                                .build();
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(binding.nameEditText.getText().toString())
+                                        .setDisplayName(binding.usernameEditText.getText().toString())
+                                        .setPhotoUri(downloadUriImg)
+                                        .build();
 
-                                        user.updateProfile(profile)
-                                                .addOnCompleteListener(task2 -> {
-                                                    if (task2.isSuccessful()) {
-                                                        navController.navigate(R.id.action_registerFragment_to_postsHomeFragment);
-                                                        Log.d("asd", "User profile updated");
-                                                    }
-                                                });
-                                    });
+                                user.updateProfile(profile)
+                                        .addOnCompleteListener(task2 -> {
+                                            if (task2.isSuccessful()) {
+                                                UserClass usser = new UserClass();
+                                                usser.email = binding.emailEditText.getText().toString();
+                                                usser.name = binding.nameEditText.getText().toString();
+                                                usser.userName = binding.usernameEditText.getText().toString();
+                                                usser.imageIcon = downloadUriImg.toString();
+                                                db.collection("users").document(usser.email).set(usser);
+                                                navController.navigate(R.id.action_registerFragment_to_postsHomeFragment);
+                                                Log.d("asd", "User profile updated");
+                                            }
+                                        });
+                            });
 
-                        } else {
-                            Log.d("FAIL", "Create user with email : failure", task.getException());
-                            Toast.makeText(requireContext(), Objects.requireNonNull(task.getException()).getLocalizedMessage(),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                } else {
+                    Log.d("FAIL", "Create user with email : failure", task.getException());
+                    Toast.makeText(requireContext(), Objects.requireNonNull(task.getException()).getLocalizedMessage(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 

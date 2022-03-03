@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.example.firebasetemplate.databinding.FragmentNewPostBinding;
 import com.example.firebasetemplate.model.Post;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.firebasetemplate.model.UserClass;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -47,8 +47,10 @@ public class NewPostFragment extends AppFragment {
         });
         Glide.with(requireContext()).load(auth.getCurrentUser().getPhotoUrl()).into(binding.autorFotoNewPost);
 
+
+
+
         binding.publicar.setOnClickListener(v -> {
-            
             if (uriImagen != null) {
                 binding.publicar.setEnabled(false);
 
@@ -59,10 +61,19 @@ public class NewPostFragment extends AppFragment {
                         .addOnSuccessListener(urlDescarga -> {
                             Post post = new Post();
                             post.content = binding.contenido.getText().toString();
-                            post.authorName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-                            post.date = LocalDateTime.now().toString();
                             post.imageUrl = urlDescarga.toString();
-                            post.imageUser = auth.getCurrentUser().getPhotoUrl().toString();
+                            post.date = LocalDateTime.now().toString();
+
+                            db.collection("users").document(auth.getCurrentUser().getEmail())
+                                    .addSnapshotListener((collectionSnapshot, e) -> {
+                                        if (collectionSnapshot != null) {
+                                            UserClass usser = collectionSnapshot.toObject(UserClass.class);
+                                            post.authorName = usser.name;
+                                            post.authorUsername = usser.userName;
+                                            post.imageUser = usser.imageIcon;
+                                        }
+                                    });
+
                             FirebaseFirestore.getInstance().collection("posts")
                                     .add(post)
                                     .addOnCompleteListener(task -> {
@@ -70,7 +81,6 @@ public class NewPostFragment extends AppFragment {
                                         binding.publicar.setEnabled(true);
                                         navController.popBackStack();
                                     });
-//                            post.postid = DocumentSnapshot.getId();
                         });
             }
             else {

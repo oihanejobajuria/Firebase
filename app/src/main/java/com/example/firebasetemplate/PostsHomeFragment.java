@@ -51,7 +51,7 @@ public class PostsHomeFragment extends AppFragment {
     }
 
     Query setQuery() {
-        return db.collection("posts");
+        return db.collection("posts").orderBy("date", Query.Direction.DESCENDING);
     }
 
     class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -76,7 +76,7 @@ public class PostsHomeFragment extends AppFragment {
                                 !post.likes.containsKey(auth.getUid()) ? true : FieldValue.delete());
             });
             holder.itemView.setOnClickListener(view -> {
-                NavigationDirections.ActionGlobalPostDetailFragment action = NavigationDirections.actionGlobalPostDetailFragment();
+                NavGraphDirections.ActionGlobalPostDetailFragment action = NavGraphDirections.actionGlobalPostDetailFragment();
                 action.setPostId(post.postid);
                 navController.navigate(action);
             });

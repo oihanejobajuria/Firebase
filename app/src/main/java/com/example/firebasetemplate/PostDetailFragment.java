@@ -15,16 +15,10 @@ import com.google.firebase.firestore.FieldValue;
 
 public class PostDetailFragment extends AppFragment {
 
-    //    private static final String POST_ID = "param";
-//    private String mParam;
     private FragmentPostDetailBinding binding;
 
     public PostDetailFragment() {
     }
-
-//    public PostDetailFragment(String mParam) {
-//        this.mParam = mParam;
-//    }
 
     // -------------------------------------------------------
 
@@ -44,6 +38,7 @@ public class PostDetailFragment extends AppFragment {
                 Post post = collectionSnapshot.toObject(Post.class);
                 binding.autor.setText(post.authorName);
                 binding.contenido.setText(post.content);
+                binding.arroba.setText(post.authorUsername);
 
                 if (getActivity() == null) {
                     return;
@@ -57,8 +52,8 @@ public class PostDetailFragment extends AppFragment {
                         + post.postid);
 
 
-                post.postid = db.collection("posts").
-                        document(PostDetailFragmentArgs.fromBundle(getArguments()).getPostId())
+                post.postid = db.collection("posts")
+                        .document(PostDetailFragmentArgs.fromBundle(getArguments()).getPostId())
                         .getId();
 
                 binding.favorito.setOnClickListener(v ->
