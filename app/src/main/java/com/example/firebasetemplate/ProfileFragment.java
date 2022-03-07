@@ -38,5 +38,11 @@ public class ProfileFragment extends AppFragment {
                     }
                 });
 
+        binding.imgBtnEdit.setOnClickListener(v -> {
+            ProfileFragmentDirections.ActionProfileFragmentToEditProfileFragment action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment();
+            action.setUserId(auth.getCurrentUser().getEmail());
+            navController.navigate(action);
+        });
+
     }
 }

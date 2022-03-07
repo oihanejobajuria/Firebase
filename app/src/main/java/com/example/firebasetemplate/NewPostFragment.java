@@ -64,13 +64,10 @@ public class NewPostFragment extends AppFragment {
                             post.imageUrl = urlDescarga.toString();
                             post.date = LocalDateTime.now().toString();
 
-                            // TODO preguntar si se puede hacer asi
                             db.collection("users").document(auth.getCurrentUser().getEmail())
                                     .addSnapshotListener((collectionSnapshot, e) -> {
                                         if (collectionSnapshot != null) {
-                                            System.out.println("AAAAAAAAAA" + collectionSnapshot);
                                             UserClass usser = collectionSnapshot.toObject(UserClass.class);
-                                            System.out.println("BBBBBBBBBBBBBBB" + usser.userName);
                                             post.authorName = usser.name;
                                             post.authorUsername = usser.userName;
                                             post.imageUser = usser.imageIcon;

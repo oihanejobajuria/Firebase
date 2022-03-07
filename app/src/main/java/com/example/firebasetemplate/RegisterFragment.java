@@ -63,6 +63,8 @@ public class RegisterFragment extends AppFragment {
                 return;
             }
 
+
+
             FirebaseAuth.getInstance()
                     .createUserWithEmailAndPassword(
                             binding.emailEditText.getText().toString(),
@@ -80,7 +82,6 @@ public class RegisterFragment extends AppFragment {
                                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                 UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
                                         .setDisplayName(binding.nameEditText.getText().toString())
-                                        .setDisplayName(binding.usernameEditText.getText().toString())
                                         .setPhotoUri(downloadUriImg)
                                         .build();
 
@@ -90,11 +91,10 @@ public class RegisterFragment extends AppFragment {
                                                 UserClass usser = new UserClass();
                                                 usser.email = binding.emailEditText.getText().toString();
                                                 usser.name = binding.nameEditText.getText().toString();
-                                                usser.userName = binding.usernameEditText.getText().toString();
+                                                usser.userName = "@"+binding.usernameEditText.getText().toString();
                                                 usser.imageIcon = downloadUriImg.toString();
                                                 db.collection("users").document(usser.email).set(usser);
                                                 navController.navigate(R.id.action_registerFragment_to_postsHomeFragment);
-                                                Log.d("asd", "User profile updated");
                                             }
                                         });
                             });
@@ -105,6 +105,8 @@ public class RegisterFragment extends AppFragment {
                             Toast.LENGTH_SHORT).show();
                 }
             });
+
+
         });
     }
 

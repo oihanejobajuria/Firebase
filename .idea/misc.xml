@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/drawable/like_off.xml" value="0.19" />
         <entry key="app/src/main/res/drawable/like_on.xml" value="0.2955" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.14" />
-        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.2777777777777778" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_new_post.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_post_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_posts.xml" value="0.2037037037037037" />

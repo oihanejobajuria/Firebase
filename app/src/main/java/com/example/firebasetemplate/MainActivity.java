@@ -46,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
             if(destination.getId() == R.id.signInFragment) {
                 binding.toolbar.setVisibility(View.GONE);
                 binding.bottomNavView.setVisibility(View.GONE);
+            } else if (destination.getId() == R.id.newPostFragment ||
+                        destination.getId() == R.id.postDetailFragment) {
+                binding.toolbar.setVisibility(View.VISIBLE);
+                binding.bottomNavView.setVisibility(View.GONE);
             } else {
                 binding.toolbar.setVisibility(View.VISIBLE);
                 binding.bottomNavView.setVisibility(View.VISIBLE);
