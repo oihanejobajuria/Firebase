@@ -33,8 +33,11 @@ public class ProfileFragment extends AppFragment {
                         binding.nameText.setText(user.name);
                         binding.username.setText(user.userName);
                         binding.emailText.setText(user.email);
-                        Glide.with(this).load(user.imageIcon).centerCrop().into(binding.imgPerfil);
-                        Glide.with(this).load(user.imageIcon).into(binding.imgPerfil2);
+
+                        if (getActivity() != null) {
+                            Glide.with(this).load(user.imageIcon).centerCrop().into(binding.imgPerfil);
+                            Glide.with(this).load(user.imageIcon).into(binding.imgPerfil2);
+                        }
                     }
                 });
 

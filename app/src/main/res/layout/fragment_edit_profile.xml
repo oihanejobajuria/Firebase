@@ -31,6 +31,7 @@
                 android:id="@+id/imgPerfil"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_launcher_background" />
 
         </androidx.cardview.widget.CardView>
@@ -67,31 +68,11 @@
                 android:hint="Username" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/emailInput"
-            style="@style/ThemeOverlay.Material3.AutoCompleteTextView.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/usernameInput"
-            android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="20dp"
-            android:focusable="false"
-            android:focusableInTouchMode="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailEdit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:hint="Email" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <Button
             android:id="@+id/btnPass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/emailInput"
+            android:layout_below="@id/usernameInput"
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
             android:text="Cambiar contraseña" />

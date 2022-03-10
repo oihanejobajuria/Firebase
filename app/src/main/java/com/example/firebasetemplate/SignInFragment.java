@@ -99,13 +99,13 @@ public class SignInFragment extends AppFragment {
                 .addOnCompleteListener(requireActivity(), task -> {
                     if (task.isSuccessful()) {
 
-                    UserClass usser = new UserClass();
-                    usser.email = account.getEmail();
-                    usser.name = account.getDisplayName();
-                    usser.userName = "@"+split;
-                    usser.imageIcon = String.valueOf(account.getPhotoUrl());
-                    db.collection("users").document(usser.email).set(usser);
-                    navController.navigate(R.id.action_signInFragment_to_postsHomeFragment);
+                        UserClass usser = new UserClass();
+                        usser.email = account.getEmail();
+                        usser.name = account.getDisplayName();
+                        usser.userName = "@"+split;
+                        usser.imageIcon = String.valueOf(account.getPhotoUrl());
+                        db.collection("users").document(usser.email).set(usser);
+                        navController.navigate(R.id.action_signInFragment_to_postsHomeFragment);
 
                     } else {
                         binding.signInProgressBar.setVisibility(View.GONE);
