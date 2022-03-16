@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.firebasetemplate.databinding.FragmentEditProfileBinding;
 import com.example.firebasetemplate.model.Post;
 import com.example.firebasetemplate.model.UserClass;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,7 +32,8 @@ public class EditProfileFragment extends AppFragment {
     private FragmentEditProfileBinding binding;
     private Uri uriImg;
     ListenerRegistration listy;
-    String oldName = auth.getCurrentUser().getDisplayName();
+//    static String oldName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+//    String oldName = EditProfileFragmentArgs.fromBundle(getArguments()).getOldName();
     private List<Post> postsList = new ArrayList<>();
 
     @Override
@@ -62,14 +64,13 @@ public class EditProfileFragment extends AppFragment {
 
 
         binding.imgPerfil.setOnClickListener(v -> galeria.launch("image/*"));
-        appViewModel.uriImagenPerfilSeleccionada.observe(getViewLifecycleOwner(), uri -> {
+        appViewModel.uriImagenPerfilEdit.observe(getViewLifecycleOwner(), uri -> {
             Glide.with(this).load(uri).into(binding.imgPerfil);
             Glide.with(this).load(uri).into(binding.imgPerfil2);
             uriImg = uri;
         });
 
         binding.btnSave.setOnClickListener(view1 -> {
-
             if (uriImg != null) {
                 FirebaseStorage.getInstance()
                         .getReference("/images/" + UUID.randomUUID() + ".jpg")
@@ -81,9 +82,6 @@ public class EditProfileFragment extends AppFragment {
             } else {
                 updateProfile(null);
             }
-
-
-            // TODO: como contasenya
 
 
         });
@@ -126,14 +124,23 @@ public class EditProfileFragment extends AppFragment {
                 }).addOnCompleteListener(task3 -> {
             if (task3.isSuccessful()) {
                 db.collection("posts")
-                        .whereEqualTo("authorName", oldName)
+                        .whereEqualTo("authorName", EditProfileFragmentArgs.fromBundle(getArguments()).getOldName())
                         .addSnapshotListener((collectionSnapshot, e) -> {
                             postsList.clear();
                             for (DocumentSnapshot d : collectionSnapshot) {
                                 Post post = d.toObject(Post.class);
+                                System.out.println("aaaaaaaaaa " + post.postid);
                                 post.postid = d.getId();
                                 postsList.add(post);
                             }
+                            for (Post p : postsList) {
+                                p.authorName = currentUser.getDisplayName();
+                                p.authorUsername = "@" + binding.usernameEdit.getText().toString();
+                                p.imageUser = currentUser.getPhotoUrl().toString();
+                                System.out.println("bbbbbbbb " + p.postid);
+                                db.collection("posts").document(p.postid).set(p);
+                            }
+
                         });
             }
         });
@@ -158,10 +165,10 @@ public class EditProfileFragment extends AppFragment {
     }
 
     private final ActivityResultLauncher<String> galeria = registerForActivityResult(
-            new ActivityResultContracts.GetContent(), uri -> appViewModel.setUriImagenPerfilSeleccionada(uri));
+            new ActivityResultContracts.GetContent(), uri -> appViewModel.setUriImagenPerfilEdit(uri));
 
 
-    Query setQuery() {
-        return db.collection("posts").whereEqualTo("authorName", oldName);
-    }
+//    Query setQuery() {
+//        return db.collection("posts").whereEqualTo("authorName", oldName);
+//    }
 }

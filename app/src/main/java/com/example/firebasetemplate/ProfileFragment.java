@@ -1,6 +1,5 @@
 package com.example.firebasetemplate;
 
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.example.firebasetemplate.databinding.FragmentProfileBinding;
 import com.example.firebasetemplate.model.UserClass;
-
 
 public class ProfileFragment extends AppFragment {
     private FragmentProfileBinding binding;
@@ -43,7 +41,7 @@ public class ProfileFragment extends AppFragment {
 
         binding.imgBtnEdit.setOnClickListener(v -> {
             ProfileFragmentDirections.ActionProfileFragmentToEditProfileFragment action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment();
-            action.setUserId(auth.getCurrentUser().getEmail());
+            action.setUserId(auth.getCurrentUser().getEmail()).setOldName(auth.getCurrentUser().getDisplayName());
             navController.navigate(action);
         });
 

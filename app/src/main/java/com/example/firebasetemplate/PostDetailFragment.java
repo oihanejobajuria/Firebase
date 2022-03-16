@@ -13,6 +13,8 @@ import com.example.firebasetemplate.databinding.FragmentPostDetailBinding;
 import com.example.firebasetemplate.model.Post;
 import com.google.firebase.firestore.FieldValue;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 public class PostDetailFragment extends AppFragment {
 
     private FragmentPostDetailBinding binding;
@@ -61,7 +63,11 @@ public class PostDetailFragment extends AppFragment {
                         .update("likes." + auth.getUid(),
                                 !post.likes.containsKey(auth.getUid()) ? true : FieldValue.delete()));
 
-
+                binding.linear.setOnClickListener(view1 -> {
+                    PostDetailFragmentDirections.ActionPostDetailFragmentToPublicProfileFragment action = PostDetailFragmentDirections.actionPostDetailFragmentToPublicProfileFragment();
+                    action.setUsername(post.authorUsername);
+                    navController.navigate(action);
+                });
             }
         });
 

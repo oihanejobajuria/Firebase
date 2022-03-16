@@ -88,6 +88,9 @@
             android:name="postId"
             android:defaultValue='""'
             app:argType="string" />
+        <action
+            android:id="@+id/action_postDetailFragment_to_publicProfileFragment"
+            app:destination="@id/publicProfileFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_postDetailFragment"
@@ -101,5 +104,19 @@
             android:name="userId"
             android:defaultValue='""'
             app:argType="string" />
+        <argument
+            android:name="oldName"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+    <fragment
+        android:id="@+id/publicProfileFragment"
+        android:name="com.example.firebasetemplate.PublicProfileFragment"
+        android:label="fragment_public_profile"
+        tools:layout="@layout/fragment_public_profile" >
+        <argument
+            android:name="username"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>
