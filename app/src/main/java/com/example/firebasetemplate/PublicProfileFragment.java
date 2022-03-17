@@ -106,6 +106,12 @@ public class PublicProfileFragment extends AppFragment {
                 return;
             }
             holder.binding.favorito.setChecked(post.likes.containsKey(auth.getUid()));
+
+            holder.itemView.setOnClickListener(view -> {
+                NavGraphDirections.ActionGlobalPostDetailFragment action = NavGraphDirections.actionGlobalPostDetailFragment();
+                action.setPostId(post.postid);
+                navController.navigate(action);
+            });
         }
 
         @Override
