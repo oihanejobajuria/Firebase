@@ -108,6 +108,10 @@ public class RegisterFragment extends AppFragment {
 
 
         });
+        
+        binding.verifyEmailButton.setOnClickListener(view1 -> {
+            Toast.makeText(getContext(), "No esta disponible", Toast.LENGTH_SHORT).show();
+        });
     }
 
     private final ActivityResultLauncher<String> galeria = registerForActivityResult(

@@ -4,11 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../../layout/custom_preview.xml" value="0.38385416666666666" />
+        <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/activity_main.xml" value="0.371875" />
         <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_edit_profile.xml" value="0.371875" />
+        <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_image.xml" value="0.371875" />
+        <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_new_post.xml" value="0.371875" />
         <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_post_detail.xml" value="0.33" />
         <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_posts.xml" value="0.371875" />
         <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_profile.xml" value="0.371875" />
         <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_public_profile.xml" value="0.371875" />
+        <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_register.xml" value="0.371875" />
+        <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_sign_in.xml" value="0.371875" />
+        <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/fragment_sign_out.xml" value="0.371875" />
+        <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/nav_header_main.xml" value="0.371875" />
+        <entry key="..\:/00_DAM1/Firebase/app/src/main/res/layout/viewholder_post.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable-v24/like.xml" value="0.2955" />
         <entry key="app/src/main/res/drawable/ic_baseline_create_24.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/like_off.xml" value="0.19" />

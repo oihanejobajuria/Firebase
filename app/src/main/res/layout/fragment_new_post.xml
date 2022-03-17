@@ -12,14 +12,53 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <Button
-            android:id="@+id/publicar"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="30dp">
+
+                <ImageView
+                    android:id="@+id/autorFotoNewPost"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_baseline_face_24" />
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/publicar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:fontFamily="@font/amiko"
+                android:text="Publish"
+                app:cornerRadius="20dp" />
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/contenido"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="20dp"
-            android:text="Publish"
-            app:cornerRadius="20dp" />
+            android:layout_marginVertical="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="top|left"
+            android:hint="Write something..."
+            android:lines="6"
+            android:textSize="16sp">
+
+            <requestFocus />
+        </EditText>
 
         <ImageView
             android:id="@+id/previsualizacion"
@@ -27,41 +66,6 @@
             android:layout_height="300dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_baseline_add_a_photo_24" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                app:cardCornerRadius="30dp">
-
-                <ImageView
-                    android:id="@+id/autorFotoNewPost"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_baseline_face_24" />
-            </androidx.cardview.widget.CardView>
-
-            <EditText
-                android:id="@+id/contenido"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:gravity="top|left"
-                android:hint="Write something..."
-                android:lines="6"
-                android:textSize="16sp">
-
-                <requestFocus />
-            </EditText>
-        </LinearLayout>
 
     </LinearLayout>
 

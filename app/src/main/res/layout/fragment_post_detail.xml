@@ -25,8 +25,8 @@
 
                 <ImageView
                     android:id="@+id/autorFoto"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_baseline_face_24" />
@@ -44,11 +44,11 @@
                     style="@style/Base.TextAppearance.AppCompat.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_alternates_medium"
                     android:gravity="center_vertical"
                     android:text="asdgadf"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/arroba"
@@ -58,7 +58,8 @@
                     android:gravity="center_vertical"
                     android:text="asdgadf"
                     android:textColor="#888"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
 
             </LinearLayout>
 

@@ -4,29 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="20dp">
 
     <ImageView
         android:id="@+id/photo"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="42dp"
         android:contentDescription="avatar"
-        android:paddingTop="48dp"
         app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="\@sdfasdf"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:layout_marginTop="8dp"
         android:text="sdf"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/email"
-        android:text="dsfsdf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp"/>
+        android:text="dsfsdf"
+        android:textSize="14sp" />
 
 </LinearLayout>

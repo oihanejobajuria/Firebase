@@ -75,7 +75,9 @@
             android:layout_below="@id/usernameInput"
             android:layout_centerInParent="true"
             android:layout_marginTop="20dp"
-            android:text="Cambiar contraseña" />
+            android:fontFamily="@font/amiko"
+            android:text="Cambiar contraseña"
+            app:cornerRadius="20dp" />
 
         <Button
             android:id="@+id/btnSave"
@@ -85,7 +87,9 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:text="Guardar" />
+            android:fontFamily="@font/amiko"
+            android:text="Guardar"
+            app:cornerRadius="20dp" />
 
     </RelativeLayout>
 </FrameLayout>

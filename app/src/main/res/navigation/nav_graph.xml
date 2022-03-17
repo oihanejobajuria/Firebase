@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.firebasetemplate.ProfileFragment"
-        android:label="Profile"
+        android:label="My profile"
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_postDetailFragment_to_publicProfileFragment"
             app:destination="@id/publicProfileFragment" />
+        <action
+            android:id="@+id/action_postDetailFragment_to_imageFragment"
+            app:destination="@id/imageFragment" />
     </fragment>
     <action
         android:id="@+id/action_global_postDetailFragment"
@@ -98,7 +101,7 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.firebasetemplate.EditProfileFragment"
-        android:label="fragment_edit_profile"
+        android:label="Edit profile"
         tools:layout="@layout/fragment_edit_profile">
         <argument
             android:name="userId"
@@ -106,17 +109,27 @@
             app:argType="string" />
         <argument
             android:name="oldName"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/publicProfileFragment"
         android:name="com.example.firebasetemplate.PublicProfileFragment"
-        android:label="fragment_public_profile"
-        tools:layout="@layout/fragment_public_profile" >
+        android:label="Profile"
+        tools:layout="@layout/fragment_public_profile">
         <argument
             android:name="username"
-            app:argType="string"
-            android:defaultValue='""' />
+            android:defaultValue='""'
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageFragment"
+        android:name="com.example.firebasetemplate.imageFragment"
+        android:label="Image"
+        tools:layout="@layout/fragment_image">
+        <argument
+            android:name="postId"
+            android:defaultValue='""'
+            app:argType="string" />
     </fragment>
 </navigation>

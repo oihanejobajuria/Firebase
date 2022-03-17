@@ -58,21 +58,25 @@ public class SignInFragment extends AppFragment {
         });
 
         binding.emailSignIn.setOnClickListener(v -> {
-            FirebaseAuth.getInstance()
-                    .signInWithEmailAndPassword(
-                            binding.email.getText().toString(),
-                            binding.password.getText().toString()
-                    ).addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    navController.navigate(R.id.action_signInFragment_to_postsHomeFragment);
-                } else {
-                    Toast.makeText(requireContext(), task.getException().getLocalizedMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
+            if (binding.email.getText().toString().isEmpty() || binding.password.getText().toString().isEmpty()) {
+                Toast.makeText(getContext(), "Los campos no pueden estar vacios", Toast.LENGTH_SHORT).show();
+            } else {
+                FirebaseAuth.getInstance()
+                        .signInWithEmailAndPassword(
+                                binding.email.getText().toString(),
+                                binding.password.getText().toString()
+                        ).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        navController.navigate(R.id.action_signInFragment_to_postsHomeFragment);
+                    } else {
+                        Toast.makeText(requireContext(), task.getException().getLocalizedMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
 
-        binding.goToRegister.setOnClickListener(v -> {
+        binding.goToRegister2.setOnClickListener(v -> {
             navController.navigate(R.id.action_signInFragment_to_registerFragment);
         });
     }

@@ -68,6 +68,12 @@ public class PostDetailFragment extends AppFragment {
                     action.setUsername(post.authorUsername);
                     navController.navigate(action);
                 });
+
+                binding.imagen.setOnClickListener(v -> {
+                    PostDetailFragmentDirections.ActionPostDetailFragmentToImageFragment action = PostDetailFragmentDirections.actionPostDetailFragmentToImageFragment();
+                    action.setPostId(post.postid);
+                    navController.navigate(action);
+                });
             }
         });
 

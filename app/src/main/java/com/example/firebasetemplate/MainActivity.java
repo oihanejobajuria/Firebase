@@ -43,11 +43,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if(destination.getId() == R.id.signInFragment) {
+            if(destination.getId() == R.id.signInFragment ||
+                    destination.getId() == R.id.registerFragment) {
                 binding.toolbar.setVisibility(View.GONE);
                 binding.bottomNavView.setVisibility(View.GONE);
             } else if (destination.getId() == R.id.newPostFragment ||
-                        destination.getId() == R.id.postDetailFragment) {
+                        destination.getId() == R.id.postDetailFragment ||
+                        destination.getId() == R.id.publicProfileFragment ||
+                        destination.getId() == R.id.profileFragment ||
+                        destination.getId() == R.id.editProfileFragment ||
+                        destination.getId() == R.id.imageFragment) {
                 binding.toolbar.setVisibility(View.VISIBLE);
                 binding.bottomNavView.setVisibility(View.GONE);
             } else {
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().addAuthStateListener(firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
                 Glide.with(this).load(firebaseAuth.getCurrentUser().getPhotoUrl()).circleCrop().into(navHeaderMainBinding.photo);
+                navHeaderMainBinding.username.setText("@asdfsa");
                 navHeaderMainBinding.name.setText(firebaseAuth.getCurrentUser().getDisplayName());
                 navHeaderMainBinding.email.setText(firebaseAuth.getCurrentUser().getEmail());
                 Log.e("sdfdfs","USER:" + firebaseAuth.getCurrentUser().getEmail());
