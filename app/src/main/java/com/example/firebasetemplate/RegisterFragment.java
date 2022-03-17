@@ -94,6 +94,7 @@ public class RegisterFragment extends AppFragment {
                                                 usser.userName = "@"+binding.usernameEditText.getText().toString();
                                                 usser.imageIcon = downloadUriImg.toString();
                                                 db.collection("users").document(usser.email).set(usser);
+
                                                 navController.navigate(R.id.action_registerFragment_to_postsHomeFragment);
                                             }
                                         });

@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.bumptech.glide.Glide;
 import com.example.firebasetemplate.databinding.ActivityMainBinding;
 import com.example.firebasetemplate.databinding.NavHeaderMainBinding;
+import com.example.firebasetemplate.model.UserClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -43,16 +44,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if(destination.getId() == R.id.signInFragment ||
+            if (destination.getId() == R.id.signInFragment ||
                     destination.getId() == R.id.registerFragment) {
                 binding.toolbar.setVisibility(View.GONE);
                 binding.bottomNavView.setVisibility(View.GONE);
             } else if (destination.getId() == R.id.newPostFragment ||
-                        destination.getId() == R.id.postDetailFragment ||
-                        destination.getId() == R.id.publicProfileFragment ||
-                        destination.getId() == R.id.profileFragment ||
-                        destination.getId() == R.id.editProfileFragment ||
-                        destination.getId() == R.id.imageFragment) {
+                    destination.getId() == R.id.postDetailFragment ||
+                    destination.getId() == R.id.publicProfileFragment ||
+                    destination.getId() == R.id.profileFragment ||
+                    destination.getId() == R.id.editProfileFragment ||
+                    destination.getId() == R.id.imageFragment) {
                 binding.toolbar.setVisibility(View.VISIBLE);
                 binding.bottomNavView.setVisibility(View.GONE);
             } else {
@@ -63,13 +64,26 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseAuth.getInstance().addAuthStateListener(firebaseAuth -> {
             if (firebaseAuth.getCurrentUser() != null) {
-                Glide.with(this).load(firebaseAuth.getCurrentUser().getPhotoUrl()).circleCrop().into(navHeaderMainBinding.photo);
-                navHeaderMainBinding.username.setText("@asdfsa");
-                navHeaderMainBinding.name.setText(firebaseAuth.getCurrentUser().getDisplayName());
-                navHeaderMainBinding.email.setText(firebaseAuth.getCurrentUser().getEmail());
-                Log.e("sdfdfs","USER:" + firebaseAuth.getCurrentUser().getEmail());
+                FirebaseFirestore.getInstance().collection("users").document(firebaseAuth.getCurrentUser().getEmail())
+                        .addSnapshotListener((collectionSnapshot, e) -> {
+                            if (collectionSnapshot != null) {
+                                System.out.println(collectionSnapshot);
+                                UserClass user = collectionSnapshot.toObject(UserClass.class);
+                                if (user != null) {
+
+                                    Glide.with(getApplicationContext()).load(user.imageIcon).circleCrop().into(navHeaderMainBinding.photo);
+
+                                    navHeaderMainBinding.username.setText(user.userName);
+                                    navHeaderMainBinding.name.setText(user.name);
+                                    navHeaderMainBinding.email.setText(user.email);
+                                    Log.e("sdfdfs", "USER:" + firebaseAuth.getCurrentUser().getEmail());
+                                }
+                            }
+                        });
+
             }
         });
+
     }
 
     @Override

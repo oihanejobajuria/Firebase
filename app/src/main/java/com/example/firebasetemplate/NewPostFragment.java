@@ -68,11 +68,13 @@ public class NewPostFragment extends AppFragment {
                                     .addSnapshotListener((collectionSnapshot, e) -> {
                                         if (collectionSnapshot != null) {
                                             UserClass usser = collectionSnapshot.toObject(UserClass.class);
+                                            post.postid = UUID.randomUUID().toString();
                                             post.authorName = usser.name;
                                             post.authorUsername = usser.userName;
                                             post.imageUser = usser.imageIcon;
                                             FirebaseFirestore.getInstance().collection("posts")
-                                                    .add(post)
+                                                    .document(post.postid)
+                                                    .set(post)
                                                     .addOnCompleteListener(task -> {
                                                         appViewModel.setUriImagenSeleccionada(null);
                                                         binding.publicar.setEnabled(true);

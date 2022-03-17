@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PostsHomeFragment extends AppFragment {
-
     private FragmentPostsBinding binding;
     private List<Post> postsList = new ArrayList<>();
     private PostsAdapter adapter;
