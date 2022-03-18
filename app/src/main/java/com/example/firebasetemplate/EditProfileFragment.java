@@ -25,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public class EditProfileFragment extends AppFragment {
@@ -138,7 +139,9 @@ public class EditProfileFragment extends AppFragment {
                                 p.authorUsername = "@" + binding.usernameEdit.getText().toString();
                                 p.imageUser = currentUser.getPhotoUrl().toString();
                                 System.out.println("bbbbbbbb " + p.postid);
-                                db.collection("posts").document(p.postid).set(p);
+                                db.collection("posts").document(p.postid).update("authorName" ,p.authorName);
+                                db.collection("posts").document(p.postid).update("authorUserName" ,p.authorUsername);
+                                db.collection("posts").document(p.postid).update("imageUser" ,p.imageUser);
                             }
 
                         });
